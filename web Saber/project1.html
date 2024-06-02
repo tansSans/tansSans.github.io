@@ -1,0 +1,480 @@
+<html lang="en">
+  <head>
+    <title>Project 1: Air Purifier</title>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Kode+Mono:wght@400..700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap"
+      rel="stylesheet"
+    />
+
+    <script src="https://unpkg.com/feather-icons"></script>
+
+    <style>
+      * {
+        margin: 0;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: "Inter", sans-serif;
+      }
+
+      .navbar {
+        overflow: hidden;
+        background-color: #fff2ac;
+        border-bottom: 1px solid #021024;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+      }
+
+      .navbar a {
+        float: left;
+        color: #978062;
+        text-align: center;
+        padding: 14px 16px;
+        font-size: 15px;
+        text-decoration: none;
+      }
+
+      .navbar a:hover {
+        color: #978062;
+      }
+
+      .navbar a::after {
+        content: "";
+        display: block;
+        padding-bottom: 0.5rem;
+        border-bottom: 0.1rem solid #978062;
+        transform: scaleX(0);
+        transition: 0.2s linear;
+      }
+
+      .navbar a:hover::after {
+        transform: scaleX(0.5);
+      }
+
+      .navbar a.active {
+        background-color: #978062;
+        color: #fff2ac;
+      }
+
+      .grid {
+        text-align: center;
+      }
+
+      .img {
+        margin-top: 89px;
+        margin-left: auto;
+        margin-left: auto;
+        border-radius: 2%;
+        margin-bottom: 50px;
+        margin: 100px 50px;
+        border: 1px solid black;
+      }
+
+      #myImg {
+        border-radius: 5px;
+        cursor: pointer;
+        transition: 0.3s;
+      }
+
+      .modal {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        padding-top: 100px;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgb(0, 0, 0);
+        background-color: rgba(0, 0, 0, 0.9);
+        text-align: center;
+      }
+
+      .modal-content {
+        margin: auto;
+        width: 80%;
+        max-width: 700px;
+      }
+
+      #caption {
+        margin: auto;
+        display: block;
+        width: 80%;
+        max-width: 700px;
+        text-align: center;
+        color: #ccc;
+        padding: 10px 0;
+        height: 150px;
+      }
+
+      .modal-content,
+      #caption {
+        -webkit-animation-name: zoom;
+        -webkit-animation-duration: 0.6s;
+        animation-name: zoom;
+        animation-duration: 0.6s;
+      }
+
+      @-webkit-keyframes zoom {
+        from {
+          -webkit-transform: scale(0);
+        }
+        to {
+          -webkit-transform: scale(1);
+        }
+      }
+
+      @keyframes zoom {
+        from {
+          transform: scale(0);
+        }
+        to {
+          transform: scale(1);
+        }
+      }
+
+      .close {
+        position: absolute;
+        top: 15px;
+        right: 35px;
+        color: #f1f1f1;
+        font-size: 40px;
+        font-weight: bold;
+        transition: 0.3s;
+      }
+
+      .close:hover,
+      .close:focus {
+        color: #bbb;
+        text-decoration: none;
+        cursor: pointer;
+      }
+
+      .cover .judul {
+        font-size: 1.5em;
+        margin-left: 30px;
+        margin-top: 350px;
+        padding: 20px;
+        margin-bottom: 250px;
+      }
+
+      .cover2 {
+        padding: 8rem 15% 0.5rem;
+        background-color: #978062;
+        min-height: 400px;
+      }
+
+      .cover2 h1 {
+        text-align: center;
+        font-size: 2rem;
+        margin-bottom: 50px;
+      }
+
+      .cover2 p {
+        margin-top: 50px;
+        text-align: justify;
+      }
+
+      .cover2 p span {
+        color: #fff2ac;
+      }
+
+      .cover2 .row {
+        display: flex;
+      }
+
+      .cover3 {
+        padding: 8rem 15% 0.5rem;
+        background-color: #fff;
+        min-height: 400px;
+      }
+
+      .cover3 h1 {
+        text-align: center;
+        font-size: 2rem;
+        margin-bottom: 50px;
+      }
+
+      .cover3 p {
+        margin-top: 50px;
+        text-align: justify;
+      }
+
+      .cover3 .row {
+        display: flex;
+      }
+
+      .cover3 p span {
+        color: grey;
+      }
+
+      .cover4 {
+        padding: 8rem 15% 0.5rem;
+        background-color: #978062;
+        min-height: 400px;
+      }
+
+      .cover4 h1 {
+        text-align: center;
+        font-size: 2rem;
+        margin-bottom: 50px;
+      }
+
+      .cover4 p span {
+        color: #fff2ac;
+      }
+
+      .cover4 p {
+        margin-top: 50px;
+        text-align: justify;
+      }
+
+      .cover4 .row {
+        display: flex;
+      }
+
+      .cover5 {
+        padding: 8rem 15% 0.5rem;
+        background-color: #fff;
+        min-height: 400px;
+      }
+
+      .cover5 h1 {
+        text-align: center;
+        font-size: 2rem;
+        margin-bottom: 50px;
+      }
+
+      .cover5 p {
+        margin-top: 50px;
+        text-align: justify;
+      }
+
+      .cover5 .row {
+        display: flex;
+      }
+
+      .cover5 p span {
+        color: grey;
+      }
+
+      .cover6 {
+        background-color: #978062;
+        color: #fff2ac;
+        text-align: center;
+        padding: 20px 0;
+        text-decoration: none;
+      }
+
+      .cover6 a {
+        color: #fff2ac;
+        text-decoration: none;
+        padding: 0 1%;
+      }
+
+      .cover6 .medsos {
+        margin-top: 20px;
+      }
+
+      .cover6 .nav {
+        padding: 20px 0;
+      }
+
+      @media screen and (max-width: 650px) {
+        .grid {
+          display: flex;
+          justify-content: center;
+          float: none;
+          width: 80%;
+          margin-left: 50px;
+        }
+
+        .img {
+          margin: 80px 5px;
+        }
+
+        .row {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+          float: none;
+          width: 80%;
+          margin-left: 50px;
+        }
+
+        img {
+          width: 80%;
+        }
+
+        p {
+          margin-right: 20px;
+        }
+
+        .cover2 p {
+          margin-bottom: 150px;
+        }
+
+        .cover4 p {
+          margin-bottom: 150px;
+        }
+
+        .cover3 img {
+          margin-bottom: 150px;
+        }
+
+        .cover5 img {
+          margin-bottom: 150px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar">
+      <a class="active" href="./Saber.html">Home</a>
+      <a>Project 1: Air Purifier</a>
+    </nav>
+
+    <div class="cover" id="1">
+      <div class="grid">
+        <img
+          src="./Gambar/logo3.jpg"
+          style="width: 28%"
+          class="img"
+          id="myImg"
+        />
+        <img src="./Gambar/Ap.jpg" style="width: 50%" class="img" />
+      </div>
+    </div>
+
+    <div id="myModal" class="modal">
+      <span class="close">&times;</span>
+      <img src="./Gambar/logo3.jpg" alt="The Logo" style="width: 50%" />
+      <div id="caption"><a>The Logo</a></div>
+    </div>
+
+    <div class="cover2" id="2">
+      <h1>Filtering The Air</h1>
+
+      <div class="row">
+        <img src="./Gambar/filter.png" class="img2" width="20%" />
+
+        <p>
+          kami menggunakan HEPA (Hight Efficiency Particulate Air) untuk
+          menangkap partikel kecil maupun besar.<br /><br /><span>
+            HEPA bekerja dengan menarik udara melalui lapisan media yang sangat
+            halus, yang dapat menangkap partikel-partikel berukuran 0,3
+            mikrometer atau lebih kecil. Ini membuatnya sangat efektif dalam
+            menghilangkan partikel-partikel kecil
+          </span>
+        </p>
+      </div>
+    </div>
+
+    <div class="cover3" id="3">
+      <h1>Expel Fresh Air</h1>
+
+      <div class="row">
+        <p>
+          HEPA (Hight Efficiency Particulate Air) tak hanya untuk menangkap
+          partikel kecil maupun besar. Filter ini juga mengubah hawa panas
+          menjadi hawa sejuk.
+          <br /><br /><span>
+            Kami ingin pengguna air purifier kami tak hanya menghirup udara yang
+            sehat dan segar, pengguna kami juga tidak merasa panas akibat
+            polusi.
+          </span>
+        </p>
+
+        <img src="./Gambar/saring.png" class="img2" width="20%" />
+      </div>
+    </div>
+
+    <div class="cover4" id="4">
+      <h1>Helps With Lung Health.</h1>
+
+      <div class="row">
+        <img src="./Gambar/lung.png" class="img2" width="20%" />
+
+        <p>
+          Udara yang bersih dan sehat dapat membantu mengurangi risiko alergi
+          dan asma, serta mengurangi kemungkinan terkena penyakit pernapasan
+          seperti pneumonia dan bronkitis.<br /><br /><span>
+            Selain itu, filter udara dapat membantu mengurangi paparan terhadap
+            bahan kimia dan partikel-partikel lain dari udara, yang dapat
+            membantu mengurangi risiko masalah kesehatan pernapasan jangka
+            panjang.
+          </span>
+        </p>
+      </div>
+    </div>
+
+    <div class="cover5" id="5">
+      <h1>Saving Clean Air.</h1>
+
+      <div class="row">
+        <p>
+          Secara keseluruhan, filter udara dapat menjadi alat yang berguna untuk
+          meningkatkan kualitas udara di dalam ruangan dan mengurangi risiko
+          masalah kesehatan pernapasan.<br /><br /><span>
+            Filter udara dirancang untuk menangkap partikel-partikel kecil,
+            seperti debu, kuman, dan serbuk sari, yang dapat berada di udara.
+            Ini membantu untuk mengurangi jumlah partikel-partikel ini di udara.
+          </span>
+        </p>
+
+        <img src="./Gambar/filterAir.png" class="img2" width="20%" />
+      </div>
+    </div>
+
+    <footer class="cover6">
+      <h3 class="judul5">Follow Us</h3>
+
+      <div class="medsos">
+        <a href="#"><i data-feather="facebook"></i></a>
+        <a href="#"><i data-feather="instagram"></i></a>
+        <a href="#"><i data-feather="twitter"></i></a>
+      </div>
+
+      <div class="nav">
+        <a href="">FAQs</a>
+      </div>
+
+      <p class="p3">Created by: Sultan Rizky Akbar | &copy; 2024</p>
+    </footer>
+
+    <script>
+      feather.replace();
+    </script>
+
+    <script>
+      var modal = document.getElementById("myModal");
+      var img = document.getElementById("myImg");
+      var modalImg = document.getElementById("img01");
+      var captionText = document.getElementById("caption");
+      img.onclick = function () {
+        modal.style.display = "block";
+        modalImg.src = this.src;
+        captionText.innerHTML = this.alt;
+      };
+
+      var span = document.getElementsByClassName("close")[0];
+
+      span.onclick = function () {
+        modal.style.display = "none";
+      };
+    </script>
+  </body>
+</html>
